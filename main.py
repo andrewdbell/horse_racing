@@ -193,10 +193,23 @@ class Button:
 
 class GameScreen:
     def __init__(self, clock, screen, player_name):
-        print("gamescreen")
+        self.clock = clock
+        self.screen = screen
+        self.player_name = player_name
+        self.score = 0
 
     def open(self):
-        print("open game screen")
+        while True:
+            self.clock.tick(30)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return self.score
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        return self.score
+            backround_image = pygame.image.load("backround_test.jpg")
+            self.screen.blit(backround_image, backround_image.get_rect())
+            pygame.display.update()
 
 
 def main():
